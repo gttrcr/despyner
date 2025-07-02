@@ -1,1 +1,1 @@
-# despyner
+# despyner = python + designer
