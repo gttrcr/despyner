@@ -6,6 +6,7 @@ from PySide6.QtWidgets import QWidget
 from PySide6.QtWidgets import QDialog
 from PySide6.QtWidgets import QCheckBox
 from PySide6.QtWidgets import QPushButton
+from PySide6.QtWidgets import QLabel
 from PySide6.QtWidgets import QHBoxLayout
 from PySide6.QtWidgets import QTableWidget
 from PySide6.QtWidgets import QTableWidgetItem
@@ -188,6 +189,11 @@ class icon_name(Enum):
     HOURGLASS = 17
     LOCAL_PIZZA = 18
     TIMER_PLAY = 19
+    FILE_SAVE = 20
+    DISPLAY_SETTINGS = 21
+    VISIBILITY = 22
+    VISIBILITY_OFF = 23
+    CLEANING_SERVICE = 24
 
 
 class icon_theme(Enum):
@@ -225,6 +231,11 @@ def get_icon_path(name: icon_name, theme: icon_theme) -> str | None:
         icon_name.HOURGLASS: f"hourglass_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         icon_name.LOCAL_PIZZA: f"local_pizza_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         icon_name.TIMER_PLAY: f"timer_play_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        icon_name.FILE_SAVE: f"file_save_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        icon_name.DISPLAY_SETTINGS: f"display_settings_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        icon_name.VISIBILITY: f"visibility_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        icon_name.VISIBILITY_OFF: f"visibility_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        icon_name.CLEANING_SERVICE: f"cleaning_services_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
     }
 
     if name in icon_dict:
@@ -247,10 +258,18 @@ def get_icon(
     return icon
 
 
-def set_icon(component, name: icon_name, theme: icon_theme, size: tuple | None = None):
-    if hasattr(component, "setIcon"):
+def set_icon(
+    component,
+    name: icon_name,
+    theme: icon_theme,
+    clear: bool,
+    size: tuple | None = None,
+):
+    if isinstance(component, QPushButton):
         component.setIcon(get_icon(name, theme))
-    elif hasattr(component, "setPicture"):
+        if clear:
+            component.setText(None)
+    elif isinstance(component, QLabel):
         icon_path = get_icon_path(name, theme)
         pixmap = QPixmap(icon_path)
         if size:
@@ -261,3 +280,5 @@ def set_icon(component, name: icon_name, theme: icon_theme, size: tuple | None =
                 Qt.TransformationMode.SmoothTransformation,
             )
         component.setPixmap(pixmap)
+    else:
+        raise Exception(f"No managed type for the object {component}")
