@@ -169,7 +169,7 @@ class WindowManager(QDialog):
         event.accept()
 
 
-class icon_name(Enum):
+class i_name(Enum):
     REFRESH = 1
     SETTINGS = 2
     FILE_OPEN = 3
@@ -196,46 +196,46 @@ class icon_name(Enum):
     CLEANING_SERVICE = 24
 
 
-class icon_theme(Enum):
+class i_theme(Enum):
     LIGHT = 1
     DARK = 2
 
 
-def get_icon_path(name: icon_name, theme: icon_theme) -> str | None:
+def get_icon_path(name: i_name, theme: i_theme) -> str | None:
     icon_path = despyner.__path__._path[0] + "/icons/"
 
-    if theme == icon_theme.LIGHT:
+    if theme == i_theme.LIGHT:
         color = "1C1C1C"
-    elif theme == icon_theme.DARK:
+    elif theme == i_theme.DARK:
         color = "E3E3E3"
     else:
         return None
 
     icon_dict = {
-        icon_name.REFRESH: f"refresh_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.SETTINGS: f"settings_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.FILE_OPEN: f"file_open_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.CHECK: f"check_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.ADD_LINK: f"add_link_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.LINK_OFF: f"link_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.INFO: f"info_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.ADJUST: f"adjust_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.ARROW_RANGE: f"arrow_range_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.ARROW_MENU_CLOSE: f"arrow_menu_close_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.ARROW_MENU_OPEN: f"arrow_menu_open_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.CADENCE: f"cadence_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.CAMERA: f"camera_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.NOTE_STACK: f"note_stack_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.WAVES: f"waves_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.AV_TIMER: f"av_timer_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.HOURGLASS: f"hourglass_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.LOCAL_PIZZA: f"local_pizza_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.TIMER_PLAY: f"timer_play_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.FILE_SAVE: f"file_save_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.DISPLAY_SETTINGS: f"display_settings_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.VISIBILITY: f"visibility_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.VISIBILITY_OFF: f"visibility_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
-        icon_name.CLEANING_SERVICE: f"cleaning_services_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.REFRESH: f"refresh_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.SETTINGS: f"settings_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.FILE_OPEN: f"file_open_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.CHECK: f"check_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ADD_LINK: f"add_link_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.LINK_OFF: f"link_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.INFO: f"info_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ADJUST: f"adjust_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_RANGE: f"arrow_range_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_MENU_CLOSE: f"arrow_menu_close_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_MENU_OPEN: f"arrow_menu_open_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.CADENCE: f"cadence_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.CAMERA: f"camera_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.NOTE_STACK: f"note_stack_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.WAVES: f"waves_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.AV_TIMER: f"av_timer_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.HOURGLASS: f"hourglass_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.LOCAL_PIZZA: f"local_pizza_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.TIMER_PLAY: f"timer_play_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.FILE_SAVE: f"file_save_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.DISPLAY_SETTINGS: f"display_settings_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.VISIBILITY: f"visibility_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.VISIBILITY_OFF: f"visibility_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.CLEANING_SERVICE: f"cleaning_services_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
     }
 
     if name in icon_dict:
@@ -244,9 +244,7 @@ def get_icon_path(name: icon_name, theme: icon_theme) -> str | None:
     return None
 
 
-def get_icon(
-    name: icon_name, theme: icon_theme, size: tuple | None = None
-) -> QIcon | None:
+def get_icon(name: i_name, theme: i_theme, size: tuple | None = None) -> QIcon | None:
     icon_path = get_icon_path(name, theme)
     if not icon_path:
         return None
@@ -260,8 +258,8 @@ def get_icon(
 
 def set_icon(
     component,
-    name: icon_name,
-    theme: icon_theme,
+    name: i_name,
+    theme: i_theme,
     clear: bool,
     size: tuple | None = None,
 ):
