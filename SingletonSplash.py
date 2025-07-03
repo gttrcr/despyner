@@ -1,9 +1,9 @@
-from PySide6.QtGui import QPixmap, QMovie
+from PySide6.QtGui import QPixmap
 from PySide6.QtCore import QCoreApplication, Qt
-from PySide6.QtWidgets import QSplashScreen, QWidget
+from PySide6.QtWidgets import QWidget, QDialog, QLabel, QVBoxLayout, QHBoxLayout
 
 
-class SingletonSplash(QSplashScreen):
+class SingletonSplash(QDialog):
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -11,29 +11,50 @@ class SingletonSplash(QSplashScreen):
             cls._instance = super(SingletonSplash, cls).__new__(cls)
         return cls._instance
 
-    def __init__(self, file: str = None, width: int = 100, height: int = 100):
-        if file:
-            self.__movie = QMovie(file)
-            pixmap = QPixmap(self.__movie.frameRect().size())
-            self.__splash = QSplashScreen(pixmap)
-            self.__movie.frameChanged.connect(
-                lambda x: self.__splash.setPixmap(
-                    self.__movie.currentPixmap().scaled(
-                        width,
-                        height,
-                        Qt.AspectRatioMode.KeepAspectRatio,
-                        Qt.TransformationMode.SmoothTransformation,
-                    )
-                )
-            )
+    def __init__(self, file: str | None = None, w=400, h=400, parent=None):
+        if hasattr(self, "_initialized") and self._initialized:
+            return
+        super().__init__(parent)
 
-            self.__splash.show()
-            self.__movie.jumpToFrame(0)
-            self.__movie.start()
+        self._initialized = True
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Dialog)
+        self.setAttribute(Qt.WA_TranslucentBackground)
+        self.setWindowState(Qt.WindowMaximized)
+
+        pixmap = QPixmap(file).scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.image_label = QLabel()
+        self.image_label.setPixmap(pixmap)
+        self.image_label.setAlignment(Qt.AlignCenter)
+        self.image_label.setStyleSheet("background: transparent;")
+
+        self.text_label = QLabel("Loading, please wait...")
+        self.text_label.setAlignment(Qt.AlignCenter)
+        self.text_label.setStyleSheet("background: transparent;")
+
+        self.container = QWidget()
+        self.container.setFixedSize(pixmap.width(), pixmap.height() + 30)
+        self.container.setStyleSheet("background: transparent;")
+
+        inner_layout = QVBoxLayout()
+        inner_layout.addWidget(self.image_label)
+        inner_layout.addWidget(self.text_label)
+        inner_layout.setContentsMargins(0, 0, 0, 0)
+        inner_layout.setAlignment(Qt.AlignCenter)
+        self.container.setLayout(inner_layout)
+
+        outer_layout = QVBoxLayout()
+        outer_layout.addStretch()
+        hbox = QHBoxLayout()
+        hbox.addStretch()
+        hbox.addWidget(self.container)
+        hbox.addStretch()
+        outer_layout.addLayout(hbox)
+        outer_layout.addStretch()
+        outer_layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(outer_layout)
+
+        self.show()
 
     def message(self, mess: str):
-        self.__splash.showMessage(mess)
+        self.text_label.setText(mess)
         QCoreApplication.processEvents()
-
-    def finish(self, win: QWidget):
-        self.__splash.finish(win)
