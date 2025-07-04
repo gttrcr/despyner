@@ -1,11 +1,11 @@
-from single_include import QLabel, QVBoxLayout, Qt, QTimer, QtGui
+from single_include import QLabel, QVBoxLayout, Qt, QTimer, QPixmap
 
 
 class UXPopupDialog(object):
     def __init__(self, ui, dialog, args=None):
         self.ui = ui
         self.dialog = dialog
-        self.dialog.setWindowFlags(Qt.FramelessWindowHint)
+        self.dialog.setWindowFlags(Qt.FramelessWindowHint | Qt.Dialog)
         duration = 1200
 
         if args:
@@ -21,7 +21,7 @@ class UXPopupDialog(object):
             if "icon" in args:
                 icon_pixmap = self.ui.frame.style().standardPixmap(args["icon"])
             elif "image" in args:
-                icon_pixmap = QtGui.QPixmap(args["image"])
+                icon_pixmap = QPixmap(args["image"])
 
             if icon_pixmap:
                 icon_pixmap = icon_pixmap.scaled(

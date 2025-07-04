@@ -26,7 +26,7 @@ class QTWQPB(object):
     def get_qwidget(self, row):
         layout = QHBoxLayout()
         button = QPushButton()
-        button.setIcon(self.parent.dialog.style().standardIcon(self.icon))
+        button.setIcon(self.icon)
         button.setToolTip(self.tooltip)
         button.setFixedSize(35, 35)
         button.clicked.connect(lambda: self.connect(row))
@@ -162,6 +162,8 @@ class WindowManager(QDialog):
 
         if ux:
             self.ux = ux(self.ui, self, args)
+            if parent:
+                self.setPalette(parent.palette())
 
     def closeEvent(self, event):
         if hasattr(self, "on_close"):
@@ -194,6 +196,10 @@ class i_name(Enum):
     VISIBILITY = 22
     VISIBILITY_OFF = 23
     CLEANING_SERVICE = 24
+    DELETE = 25
+    EDIT = 26
+    LOCAL_SHIP = 27
+    ADD = 28
 
 
 class i_theme(Enum):
@@ -236,6 +242,10 @@ def get_icon_path(name: i_name, theme: i_theme) -> str | None:
         i_name.VISIBILITY: f"visibility_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         i_name.VISIBILITY_OFF: f"visibility_off_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         i_name.CLEANING_SERVICE: f"cleaning_services_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.DELETE: f"delete_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.EDIT: f"edit_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.LOCAL_SHIP: f"local_shipping_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ADD: f"add_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
     }
 
     if name in icon_dict:
