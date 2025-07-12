@@ -1,6 +1,6 @@
 # despyner = python + designer
 
-## Setup
+## Setup despyner
 If you want to use this repo in your amazing and transcendental python project you only need to complete the following tasks:
 
 1. Execute `pip3 install pyside6`
@@ -24,3 +24,13 @@ SingletonSplash().message("Something is happening...")
 ...
 SingletonSplash().message("Something else is happening...")
 ```
+
+## `build.sh`
+It is a tool to build an executable application using `PyInstaller`. Consider you are inside your project folder and despyner is a submodule of your project.
+```bash
+python3 despyner/build.py main.py --name EXECUTABLE_NAME --onedir --windowed --add-data ../SOURCE_FILE:DESTINATION_FILE --add-data ../SOURCE_FOLDER:DESTINATION_FOLDER
+```
+Note that when you use `add-data`, `PyInstaller` is, by default, in the `build` folder. Then, you have to use `../` to move from `build` to a higher level. You can add source file or folder and you can call `add-data` as many times as you want.
+
+## `dn.py`
+It is a very useful tool that listens for any changes to any `.ui` file located in any folder or subfolder above the level at which `dn.py` is run.

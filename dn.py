@@ -5,8 +5,16 @@ import subprocess
 from pathlib import Path
 
 parser = argparse.ArgumentParser("dESIGNER nOTIFIER")
-parser.add_argument("folder", help="Folder to check", default=".", nargs="?")
-parser.add_argument("provider", help="pyqt6/pyside6", default="pyside6", nargs="?")
+parser.add_argument(
+    "folder", help="Folder to check. Default is %(default)s", default=".", nargs="?"
+)
+parser.add_argument(
+    "provider",
+    help="Parser to invoke. Default is %(default)s",
+    choices=["pyqt6", "pyside6"],
+    default="pyside6",
+    nargs="?",
+)
 args = parser.parse_args()
 if not args.folder:
     args.folder = "."
