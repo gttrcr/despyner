@@ -22,7 +22,7 @@ def main():
         return
 
     pyinstaller_args = [
-        "--clean",
+        # "--clean",
         "--noconfirm",
         "--log-level=TRACE",
         "--optimize=2",
