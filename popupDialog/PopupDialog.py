@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'popupDialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 6.9.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -68,6 +68,9 @@ class Ui_Dialog(object):
         self.label = QLabel(Dialog)
         self.label.setObjectName("label")
         self.label.setMinimumSize(QSize(274, 60))
+        font = QFont()
+        font.setPointSize(20)
+        self.label.setFont(font)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout.addWidget(
@@ -81,6 +84,7 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
+        self.label.setText(QCoreApplication.translate("Dialog", "test", None))
         pass
 
     # retranslateUi

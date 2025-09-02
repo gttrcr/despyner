@@ -4,8 +4,8 @@ from PySide6.QtWidgets import QMessageBox
 
 
 class MessageBox(QWidget):
-    def __init__(self, text: str, title: str, icon: Enum, buttons):
-        super().__init__()
+    def __init__(self, text: str, title: str, icon: Enum, buttons, parent=None):
+        super().__init__(parent)
         self.__text = text
         self.__title = title
         self.__icon = icon

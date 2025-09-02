@@ -17,12 +17,70 @@ If you want to be compliant with *my very personal and arbitrary* choice of proj
 6. Use `single_include.py` file to store the entire list of libraries, packages, imports you will need
 7. Use `SingletonSplash` to make the wait while the program loads more pleasant:
 ```py
-SingletonSplash("SOME_IMAGE_TO_DIAPLAY")
+SingletonSplash("SOME_IMAGE_TO_DISPLAY")
 SingletonSplash().message("Loading...")
 ...
 SingletonSplash().message("Something is happening...")
 ...
 SingletonSplash().message("Something else is happening...")
+```
+
+### example of main.py file
+```python
+import sys
+
+sys.dont_write_bytecode = True
+
+from os import path
+from PySide6.QtWidgets import QApplication
+from despyner.SingletonSplash import SingletonSplash
+
+
+def abs_path(filename, ref_position=__file__):
+    return path.abspath(path.join(path.dirname(ref_position), filename))
+
+
+app = QApplication(sys.argv)
+SingletonSplash(abs_path("SOME_IMAGE_TO_DISPLAY", __file__))
+SingletonSplash().message("Loading...")
+
+import Config
+from despyner.QtMger import WindowManager
+
+# in this example the main window is named Dashboard
+
+# the ui is ui/Dashboard.py (generated from ui/dashboard.ui and dn)
+from ui.Dashboard import Ui_Dialog
+
+# the ux is ux/Dashboard.py
+from ux.Dashboard import Dashboard
+
+if __name__ == "__main__":
+    SingletonSplash().message("Starting...")
+    Config.Config("config.json") # this is optional
+    c = Config.Config().config # this is optional
+    win = WindowManager(Ui_Dialog, Dashboard, c)
+    win.show()
+    SingletonSplash().close()
+    sys.exit(app.exec())
+```
+
+### example of `ux.Dashboard.py`
+```python
+import globals
+from single_include import Qt
+from despyner.QtMger import get_icon, i_name
+
+
+class Dashboard:
+    def __init__(self, ui, dialog, args=None):
+        self.ui = ui
+        self.dialog = dialog
+        self.args = args
+        
+        self.dialog.setWindowState(Qt.WindowMaximized)
+        self.ui.tabWidget.setTabIcon(0, get_icon(i_name.WAVES, globals.theme))
+        self.ui.tabWidget.setTabIcon(1, get_icon(i_name.NOTE_STACK, globals.theme))
 ```
 
 ## `build.sh`

@@ -200,6 +200,12 @@ class i_name(Enum):
     EDIT = 26
     LOCAL_SHIP = 27
     ADD = 28
+    ARROW_UPWARD = 29
+    ARROW_DOWNWARD = 30
+    ARROW_BACK = 31
+    ARROW_FORWARD = 32
+    WARNING = 33
+    ERROR = 34
 
 
 class i_theme(Enum):
@@ -246,6 +252,12 @@ def get_icon_path(name: i_name, theme: i_theme) -> str | None:
         i_name.EDIT: f"edit_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         i_name.LOCAL_SHIP: f"local_shipping_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
         i_name.ADD: f"add_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_UPWARD: f"arrow_upward_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_DOWNWARD: f"arrow_downward_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_BACK: f"arrow_back_128dp_{color}_FILL0_wght400_GRAD0_opsz48.png",
+        i_name.ARROW_FORWARD: f"arrow_forward_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
+        i_name.WARNING: f"warning_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
+        i_name.ERROR: f"error_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
     }
 
     if name in icon_dict:
