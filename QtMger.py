@@ -282,7 +282,7 @@ def set_icon(
     component,
     name: i_name,
     theme: i_theme,
-    clear: bool,
+    clear: bool = True,
     size: tuple | None = None,
 ):
     if isinstance(component, QPushButton):
