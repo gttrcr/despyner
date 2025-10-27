@@ -127,9 +127,12 @@ class QTW(object):
 
         return rows
 
-    def to_csv(qtw: QTableWidget, filename):
+    def to_csv(qtw: QTableWidget, filename: str):
+        columns = range(qtw.columnCount())
+        header = [qtw.horizontalHeaderItem(column).text() for column in columns]
         with open(filename, "w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
+            writer.writerow(header)
             for row in range(qtw.rowCount()):
                 row_data = [
                     qtw.item(row, col).text() if qtw.item(row, col) else ""

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'popupDialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.2
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -72,6 +72,7 @@ class Ui_Dialog(object):
         font.setPointSize(20)
         self.label.setFont(font)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label.setWordWrap(True)
 
         self.verticalLayout.addWidget(
             self.label, 0, Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter
