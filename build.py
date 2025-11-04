@@ -4,13 +4,14 @@ import PyInstaller.__main__
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Build a Python script into an executable using PyInstaller."
+        description="Build a Python script with PyInstaller"
     )
     parser.add_argument("script", help="The Python script to package")
     parser.add_argument("--name", default="my_app")
     parser.add_argument("--build-path", default="./build")
     parser.add_argument("--dist-path", default="./dist")
     parser.add_argument("--add-data", default=[], action="append")
+    parser.add_argument("--default", action="store_true")
     parser.add_argument("--windowed", action="store_true")
     parser.add_argument("--onefile", action="store_true")
     parser.add_argument("--onedir", action="store_true")
@@ -33,10 +34,17 @@ def main():
     ]
 
     if args.icon:
-        pyinstaller_args.append(f"--icon={args.icon}")
+        pyinstaller_args.append(f"--icon=../{args.icon}")
+        # needed to load icon in the executable
+        pyinstaller_args.append(f"--add-data=../{args.icon}:.")
 
     for data in args.add_data:
         pyinstaller_args.append(f"--add-data={data}")
+
+    if args.default:
+        pyinstaller_args.append("--onedir")
+        # needed to load icons in the executable
+        pyinstaller_args.append(f"--add-data=../despyner/icons:despyner/icons/")
 
     if args.onefile:
         pyinstaller_args.append("--onefile")
