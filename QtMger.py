@@ -46,7 +46,7 @@ class QTW(object):
             qtw.removeColumn(i)
 
         data_columns = {}
-        if len(data) > 0:
+        if data and len(data) > 0:
             for col in data[0]:
                 col_idx = qtw.columnCount()
                 data_columns[col] = col_idx
@@ -57,17 +57,18 @@ class QTW(object):
         for i in reversed(range(rc)):
             qtw.removeRow(i)
 
-        for row in data:
-            row_idx = qtw.rowCount()
-            qtw.insertRow(row_idx)
-            for col in row:
-                qtw.setItem(
-                    row_idx,
-                    data_columns[col],
-                    QTableWidgetItem(str(row[col])),
-                )
-            if action:
-                action(row_idx, row, qtw)
+        if data and len(data) > 0:
+            for row in data:
+                row_idx = qtw.rowCount()
+                qtw.insertRow(row_idx)
+                for col in row:
+                    qtw.setItem(
+                        row_idx,
+                        data_columns[col],
+                        QTableWidgetItem(str(row[col])),
+                    )
+                if action:
+                    action(row_idx, row, qtw)
 
         qtw.resizeColumnsToContents()
         qtw.resizeRowsToContents()
