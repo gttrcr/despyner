@@ -88,7 +88,7 @@ class QTW(object):
         qtw.resizeRowsToContents()
 
     def add_qtwqpb(qtw: QTableWidget, qtwqpb, col_idx: int = None):
-        if not col_idx:
+        if col_idx is None:
             col_idx = qtw.columnCount()
 
         qtw.insertColumn(col_idx)
