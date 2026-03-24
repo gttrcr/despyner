@@ -10,7 +10,6 @@ if ($PWD.Path -match "[\\/]despyner([\\/]|$)") {
                 --workpath=./build `
                 --specpath=./ `
                 --distpath=./dist `
-                --noconfirm `
                 --log-level=TRACE `
                 --onedir `
                 --name=$name `
