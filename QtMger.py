@@ -211,6 +211,7 @@ class i_name(Enum):
     WARNING = 33
     ERROR = 34
     MONEY_BAG = 35
+    ARCHIVE = 36
 
 
 class i_theme(Enum):
@@ -263,7 +264,8 @@ def get_icon_path(name: i_name, theme: i_theme) -> str | None:
         i_name.ARROW_FORWARD: f"arrow_forward_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
         i_name.WARNING: f"warning_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
         i_name.ERROR: f"error_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
-        i_name.MONEY_BAG: f"money_bag_128dp_{color}_FILL0_wght400_GRAD0_opsz48"
+        i_name.MONEY_BAG: f"money_bag_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
+        i_name.ARCHIVE: f"archive_128dp_{color}_FILL0_wght400_GRAD0_opsz48",
     }
 
     if name in icon_dict:
