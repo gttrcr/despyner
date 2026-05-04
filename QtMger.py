@@ -17,18 +17,22 @@ from PySide6.QtGui import QIcon
 class QTWQPB(object):
     """QTableWidgetQPushButton"""
 
-    def __init__(self, tooltip: str, icon: IntEnum, connect, parent):
+    def __init__(
+        self, tooltip: str, icon: IntEnum, connect, parent, size: tuple | None = None
+    ):
         self.tooltip = tooltip
         self.icon = icon
         self.connect = connect
         self.parent = parent
+        self.size = size if size else (35, 35)
 
     def get_qwidget(self, row):
         layout = QHBoxLayout()
         button = QPushButton()
         button.setIcon(self.icon)
+        button.setIconSize(QSize(self.size[0] * 0.6, self.size[1] * 0.6))
         button.setToolTip(self.tooltip)
-        button.setFixedSize(35, 35)
+        button.setFixedSize(self.size[0], self.size[1])
         button.clicked.connect(lambda: self.connect(row))
         layout.addWidget(button, alignment=Qt.AlignmentFlag.AlignCenter)
         qwidget = QWidget()
